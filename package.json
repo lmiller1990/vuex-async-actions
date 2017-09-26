@@ -1,0 +1,25 @@
+{
+  "name": "vuex-async-actions",
+  "version": "1.0.0",
+  "description": "Helpers methods to manage async calls in vuex.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmiller1990/vuex-async-actions.git"
+  },
+  "keywords": [
+    "vuex",
+    "async",
+    "mutations",
+    "actions"
+  ],
+  "author": "Lachlan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lmiller1990/vuex-async-actions/issues"
+  },
+  "homepage": "https://github.com/lmiller1990/vuex-async-actions#readme"
+}
