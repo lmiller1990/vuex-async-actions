@@ -1,6 +1,6 @@
 {
   "name": "vuex-async-actions",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Helpers methods to manage async calls in vuex.",
   "main": "src/index.js",
   "scripts": {
@@ -21,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/lmiller1990/vuex-async-actions/issues"
   },
-  "homepage": "https://github.com/lmiller1990/vuex-async-actions#readme"
+  "homepage": "https://github.com/lmiller1990/vuex-async-actions",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "jest": "^21.1.0"
+  }
 }
