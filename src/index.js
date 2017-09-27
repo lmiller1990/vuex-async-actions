@@ -18,10 +18,10 @@ export const registerMutations = (mutations, types) => {
 	})
 }
 
-export const fetchAsync = (store, url, mutationTypes, callback) => {
+export const fetchAsync = (store, { url, params }, mutationTypes, callback) => {
   store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: true })
 
-  return axios(url, {})
+  return axios.get(url, { params })
     .then(response => {
 			let data = response
 			
