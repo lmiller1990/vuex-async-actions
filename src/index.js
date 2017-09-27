@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const registerMutations = (mutations, types) => {
 	Object.keys(types).forEach(type => {
 		mutations[types[type].BASE] = (state, payload) => {
