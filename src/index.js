@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Vue from 'vue'
 
 export const registerMutations = (mutations, types) => {
 	Object.keys(types).forEach(type => {
