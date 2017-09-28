@@ -24,10 +24,10 @@ const registerMutations = (mutations, types) => {
 	})
 }
 
-const fetchAsync = (store, url, mutationTypes, callback) => {
+const fetchAsync = (store, { url, params }, mutationTypes, callback) => {
   store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: true })
 
-  return axios(url, {})
+  return axios.get(url, { params })
     .then(response => {
 			let data = response
 			
