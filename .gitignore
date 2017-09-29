@@ -1,2 +1,3 @@
 node_modules
 test/e2e
+yarn-error.log
