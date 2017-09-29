@@ -1,3 +1,5 @@
+jest.mock('axios')
+
 import { 
   registerMutations,
   fetchAsync,
@@ -13,6 +15,8 @@ const mockSet = {
   loadingKey: 'getDataPending',
   statusCode: 'getDataStatusCode'
 }
+
+import { mockStore } from './mock-data'
 
 const anotherSet = {
   BASE: 'GET_POST'
@@ -48,4 +52,16 @@ describe('createMutationSet', () => {
 
     expect(actual).toEqual(expected)
   })
+})
+
+describe('fetchAsync', () => {
+	it('calls a callback function if present after successfully fetching data', () => {
+		expect.assertions(1)
+
+		let callback = jest.fn()
+
+		return fetchAsync(mockStore, { url: 'mockurl' }, mockSet, callback)		
+		.then(() => expect(callback.mock.calls.length).toBe(1))
+
+	})
 })
