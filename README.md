@@ -90,22 +90,21 @@ const getData = createMutationSet('GET_DATA')
 const mutations = {}
 
 registerMutations(mutations, getData)
-	```
+```
 
-	Will register the follow mutation:
-	```
-	GET_DATA (state, payload) => {
-		switch (payload.type) {
-			case GET_DATA_PENDING:
-				return Vue.set(state, types[type].loadingKey, payload.value)
-			case GET_DATA_SUCCESS: 
-					Vue.set(state, getInfoAsyncStatusCode, payload.statusCode)
-						return Vue.set(state, getInfoAsyncData, payload.data)
-			case GET_DATA_FAILURE:
-						return Vue.set(state, 
-								getInfoAsyncStatusCode, 
-								payload.statusCode)
-		}
+Will register the follow mutation:
+```
+GET_DATA (state, payload) => {
+  switch (payload.type) {
+    case GET_DATA_PENDING:
+      return Vue.set(state, types[type].loadingKey, payload.value)
+		case GET_DATA_SUCCESS: 
+      Vue.set(state, getInfoAsyncStatusCode, payload.statusCode)
+        return Vue.set(state, getInfoAsyncData, payload.data)
+		case GET_DATA_FAILURE:
+      return Vue.set(state, 
+        getInfoAsyncStatusCode, 
+        payload.statusCode)
 	}
 }
 ```
@@ -139,8 +138,8 @@ const actions = {
 
 Now doing `$store.dispatch('getPostsFromApi')` will execute the following:
 
-Set `getPostPending` to `true`.
-Make the API call.
-If successful, get `getPostPending` to `false`, call `getFirstPost(response)`, and commit the result to the state using the property `getPostData`. It will also set `getPostStatusCode` (such as 200 for success, 201 for created, etc).
-If unsuccessful, set `getPostPending` to `false`, and commit the status code (for example 404) to `getPostStatusCode`.
+1. Set `getPostPending` to `true`.
+2. Make the API call.
+3. If successful, get `getPostPending` to `false`, call `getFirstPost(response)`, and commit the result to the state using the property `getPostData`. It will also set `getPostStatusCode` (such as 200 for success, 201 for created, etc).
+4. If unsuccessful, set `getPostPending` to `false`, and commit the status code (for example 404) to `getPostStatusCode`.
 
