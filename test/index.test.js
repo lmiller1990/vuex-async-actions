@@ -54,7 +54,7 @@ describe('createMutationSet', () => {
   })
 })
 
-describe('fetchAsync', () => {
+describe('fetchAsync',  () => {
 	it('calls a callback function if present after successfully fetching data', () => {
 		expect.assertions(1)
 
