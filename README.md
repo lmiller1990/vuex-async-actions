@@ -39,9 +39,9 @@ const actions = {
 
     return axios.get()
       .then((response) => {
-				store.commit('CALL_SUCCESS', response)
-				store.commit('CALL_PENDING', false)
-			})
+        store.commit('CALL_SUCCESS', response)
+        store.commit('CALL_PENDING', false)
+      })
       .catch((error => {
         store.commit('CALL_FAILURE', response)
         store.commit('CALL_PENDING', false)
@@ -63,11 +63,11 @@ Creates a `mutationSet`.
 For example `createMutationSet('GET_INFO_ASYNC')` would return the following:
 
 ``` js
-  GET_INFO_ASYNC = {
+GET_INFO_ASYNC = {
   BASE: 'GET_INFO_ASYNC',
   SUCCESS: 'GET_INFO_ASYNC_SUCCESS',
   PENDING: 'GET_INFO_ASYNC_PENDING',
-  FAILURE:    'GET_INFO_ASYNC_FAILURE',
+  FAILURE: 'GET_INFO_ASYNC_FAILURE',
   pendingKey: 'getInfoAsyncPending',
   statusCode: 'getInfoAsyncErrorCode',
   dataKey:    'getInfoAsyncData'
@@ -93,7 +93,7 @@ registerMutations(mutations, getData)
 ```
 
 Will register the follow mutation:
-```
+``` js
 GET_DATA (state, payload) => {
   switch (payload.type) {
     case GET_DATA_PENDING:
@@ -102,10 +102,11 @@ GET_DATA (state, payload) => {
       Vue.set(state, getInfoAsyncStatusCode, payload.statusCode)
         return Vue.set(state, getInfoAsyncData, payload.data)
 		case GET_DATA_FAILURE:
-      return Vue.set(state, 
+      return Vue.set(
+        state, 
         getInfoAsyncStatusCode, 
         payload.statusCode)
-	}
+  }
 }
 ```
 
@@ -120,7 +121,7 @@ Does the async call, and handles and state changes.
 
 Example:
 
-```
+``` js
 const getPost = createMutationSet('GET_POST')
 const mutations = {}
 
@@ -132,7 +133,7 @@ getFirstPost = (response) => response.data.posts[0]
 const apiUrl = 'https://jsonplaceholder.typicode.com/posts'
 
 const actions = {
-	getPostsFromApi: (store, payload) => fetchAsync(store, { url: apiUrl }, getPost, getFirstPost)
+  getPostsFromApi: (store, payload) => fetchAsync(store, { url: apiUrl }, getPost, getFirstPost)
 }
 ```
 
