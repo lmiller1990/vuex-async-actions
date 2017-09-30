@@ -45,6 +45,17 @@ const fetchAsync = (store, { url, params }, mutationTypes, callback) => {
 		})
 }
 
+const postAsync = (store, { url, data }, mutationTypes) => {
+
+	return axios.post(url, { data })
+		.then(response => {
+			console.log(response)
+
+		})
+		.catch(error => {
+		})
+}
+
 const createMutationSet = (type) => ({
 	BASE: `${type}`,
 	SUCCESS: `${type}_SUCCESS`,
@@ -58,5 +69,6 @@ const createMutationSet = (type) => ({
 export {
 	createMutationSet,
 	fetchAsync,
+	postAsync,
 	registerMutations
 }
