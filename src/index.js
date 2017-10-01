@@ -24,19 +24,27 @@ const registerMutations = (mutations, types) => {
 	})
 }
 
-const fetchAsync = (store, { url, params }, mutationTypes, callback) => {
+const fetchAsync = (store, mutationTypes, { url, params }, { responseCb, mutationCb }) => {
 	store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: true })
 
 	return axios.get(url, { params })
 		.then(response => {
 			let data = response
 
-			if (callback) {
-				data = callback(response)
+			if (responseCb) {
+				data = responseCb(response)
 			}
 
-			store.commit(mutationTypes.BASE, { type: mutationTypes.SUCCESS, data, statusCode: response.status })
-			store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: false})
+			store.commit(mutationTypes.BASE, { 
+				type: mutationTypes.SUCCESS, 
+				data, 
+				statusCode: response.status,
+				mutationCb: mutationCb 
+			})
+
+			store.commit(mutationTypes.BASE, { 
+				type: mutationTypes.PENDING, value: false
+			})
 		})
 		.catch(error => {
 			store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: false })

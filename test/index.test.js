@@ -55,13 +55,12 @@ describe('createMutationSet', () => {
 })
 
 describe('fetchAsync',  () => {
-	it('calls a callback function if present after successfully fetching data', () => {
+	it('calls a response callback function if present after successfully fetching data', () => {
 		expect.assertions(1)
 
-		let callback = jest.fn()
+		let responseCb = jest.fn()
 
-		return fetchAsync(mockStore, { url: 'mockurl' }, mockSet, callback)		
-		.then(() => expect(callback.mock.calls.length).toBe(1))
-
+		return fetchAsync(mockStore, mockSet, { url: 'mockurl' }, { responseCb })		
+		.then(() => expect(responseCb.mock.calls.length).toBe(1))
 	})
 })
