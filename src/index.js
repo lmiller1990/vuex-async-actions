@@ -10,15 +10,12 @@ const registerMutations = (mutations, types) => {
 	Object.keys(types).forEach(type => {
 		mutations[types[type].BASE] = (state, payload) => {
 			switch (payload.type) {
-				case types[type].PENDING:
+				case types[type].PENDING: 
 					return Vue.set(state, types[type].loadingKey, payload.value)
-
-				case types[type].SUCCESS:
-					Vue.set(state, types[type].statusCode, payload.statusCode)
+				case types[type].SUCCESS: 
 					return Vue.set(state, types[type].stateKey, payload.data)
-
 				case types[type].FAILURE:
-					return Vue.set(state, types[type].statusCode , payload.statusCode)
+					return Vue.set(state, types[type].statusCode , payload.status)
 			}
 		}
 	})
@@ -27,19 +24,25 @@ const registerMutations = (mutations, types) => {
 const fetchAsync = (store, mutationTypes, { url, params }, { responseCb, mutationCb }) => {
 	store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: true })
 
+	console.log(responseCb, mutationCb)
 	return axios.get(url, { params })
 		.then(response => {
 			let data = response
 
 			if (responseCb) {
 				data = responseCb(response)
+				console.log(data)
+			}
+
+			if (mutationCb) {
+				mutationCb(store.state, data)
 			}
 
 			store.commit(mutationTypes.BASE, { 
 				type: mutationTypes.SUCCESS, 
-				data, 
-				statusCode: response.status,
-				mutationCb: mutationCb 
+				data: data, 
+				status: response.status,
+				// mutationCb: mutationCb 
 			})
 
 			store.commit(mutationTypes.BASE, { 
@@ -48,8 +51,7 @@ const fetchAsync = (store, mutationTypes, { url, params }, { responseCb, mutatio
 		})
 		.catch(error => {
 			store.commit(mutationTypes.BASE, { type: mutationTypes.PENDING, value: false })
-			store.commit(mutationTypes.BASE, { type: mutationTypes.FAILURE, statusCode: error.response.status
-			})
+			store.commit(mutationTypes.BASE, { type: mutationTypes.FAILURE }) // statusCode: error.response.status
 		})
 }
 
